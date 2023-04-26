@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-2 d-flex">
+                    {{ knp_pagination_render(posts) }}
+                </div>
+                <div class="col-md-10">
+                    <button class="btn btn-icon-only btn-2 btn-info float-end" type="button" style="height:36px;" data-bs-toggle="modal" data-bs-target="#modal-notification">
+                        <span class="btn-inner--icon"><i class="fa-solid fa-circle-info"></i></span>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                {% for post in posts %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+                                <a href="{{ path('app_post_show', {'siteId' : post.site.id, 'postId': post.id}) }}" class="d-block">
+                                    {% if post.image is not null %}
+                                        <img src="{{ asset('/uploads/images/' ~ post.image) }}" class="img-fluid border-radius-lg card-post-image">
+                                    {% else %}
+                                        <img src="{{ asset('/images/no_image_info.png') }}" class="img-fluid border-radius-lg card-post-image">
+                                    {% endif %}
+                                </a>
+                            </div>
+
+                            <div class="card-body pt-2">
+                                <span class="text-gradient text-primary text-uppercase text-xs font-weight-bold my-2">
+                                    {% if post.status == 1 %}
+                                        <i class="fa-solid fa-circle-check"></i> Wyświetlany
+                                    {% else %}
+                                        <i class="fa-solid fa-circle-xmark"></i> Nie wyświetlany
+                                    {% endif %}
+                                </span>
+                                <a href="{{ path('app_post_show', {'siteId' : post.site.id, 'postId': post.id}) }}" class="card-title h5 d-block text-darker">
+                                    {{ post.title }}
+                                </a>
+                                <div class="author align-items-center">
+                                    <div class="avatar shadow bg-gradient-faded-success">
+                                        {{ post.userCreated.email|slice(0, 1) }}
+                                    </div>
+                                    <div class="name ps-3">
+                                        <span>{{ post.userCreated.email }}</span>
+                                        <div class="stats">
+                                            <small>{{ post.createdAt|format_datetime(locale='pl') }}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-gradient-dark p-0 pt-3">
+                                <div class="row align-items-center justify-content-center gap-5">
+                                    <a href="{{ path('app_post_show', {'siteId' : post.site.id, 'postId': post.id}) }}" class="btn btn-icon-only btn-2 btn-secondary">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    <a href="{{ path('app_post_edit', {'siteId' : post.site.id, 'postId': post.id}) }}" class="btn btn-icon-only btn-2 btn-warning">
+                                        <i class="fa-solid fa-pencil"></i>
+                                    </a>
+                                    <a href="" class="btn btn-icon-only btn-2 btn-danger delete-item" data-bs-toggle="modal" data-bs-target="#deleteModal" data-post-id="{{ post.id }}" data-site-id="{{ post.site.id }}">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {{ knp_pagination_render(posts) }}
+        </div>
+        <div class="col-md-4">
+            {% include('defaults/_search.html.twig') %}
+        </div>
+    </div>
+    {% include('modals/_delete_modal.html.twig') %}
+    {% include('modals/_site_info_modal.html.twig') %}
+{% endblock %}

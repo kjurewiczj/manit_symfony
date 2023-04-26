@@ -1,0 +1,23 @@
+<div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+    <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-notification">Informacje o stronie</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span class="text-dark" aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row text-center">
+                    <h6>Nazwa <span class="font-weight-light">{{ site.name }}</span></h6>
+                    <h6>Adres <span class="font-weight-light">{{ site.url }}</span></h6>
+                    <h6>Data utworzenia <span class="font-weight-light">{{ site.createdAt|date('Y-m-d') }}</span></h6>
+                    <h6>Subskrybcja do <span class="font-weight-light">{{ site.createdAt|date('Y-m-d') }}</span></h6>
+                </div>
+            </div>
+            <div class="modal-footer bg-gradient-dark">
+                <button type="button" class="btn btn-white mb-1" data-bs-dismiss="modal">Zamknij</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="card">
+    <form method="GET">
+        <div class="card-body">
+            <h3 class="font-weight-light">Filtry</h3>
+            <hr>
+            <div class="input-group mb-3">
+                <input type="text" name="post_name" class="form-control" placeholder="Wyszukaj po nazwie" aria-label="Wyszukaj" aria-describedby="search-button" value="{{ app.request.query.get('post_name') }}">
+            </div>
+        </div>
+        <div class="card-footer p-3 text-center">
+            <a href="{{ path(app.request.attributes.get('_route'), {'siteId' : app.request.attributes.get('siteId')}) }}" class="btn btn-danger text-light">Reset</a>
+            <button type="submit" class="btn btn-dark text-light">Szukaj</button>
+        </div>
+    </form>
+</div>

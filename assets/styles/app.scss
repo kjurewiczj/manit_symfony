@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+@import "~bootstrap/scss/bootstrap";
+* {font-family: 'Poppins', sans-serif;}
+body {
+    background-color: #f3f2f2 !important;
+}
+.fa-chart-simple {
+    background-color: #70a1ff;
+}
+.fa-gear {
+    background-color: #eccc68;
+}
+.fa-book {
+    background-color: #0bd30b;
+}
+.list-unstyled .fa-solid {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-radius: 5px;
+}
+.fa-circle-check {
+    color: #2ecc71;
+}
+.fa-circle-xmark {
+    color: #e74c3c;
+}
+.card-post-image {
+    width: 300px;
+    height: 200px;
+}
+.post-image {
+    width: 455px;
+    height: 305px;
+}
+.card-google-seo-title {
+    font-size: 18px;
+    line-height: 1.2;
+    letter-spacing: normal;
+    color: #1a0dab;
+    font-family: Arial;
+}
+.card-google-seo-url {
+    margin-top: -2px;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: normal;
+    color: #006621;
+    font-family: Arial;
+}
+.card-google-seo-description {
+    color: #545454;
+    font-size: 13px;
+    line-height: 1.4;
+    font-family: Arial;
+}
+.card-facebook-seo-image {
+    border: 1px solid #dadde1;
+    width: 500px;
+    height: 261px;
+}
+.card-facebook-seo-description {
+    border: 1px solid #dadde1;
+    border-top: none;
+    padding: 10px 12px;
+    color: #1d2129;
+    background: #f2f3f5;
+    width: 500px;
+}
+.card-facebook-seo-url {
+    color: #606770;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    line-height: 11px;
+    text-transform: uppercase;
+}
+.card-facebook-seo-title {
+    color: #1d2129;
+    font-weight: 600;
+    font-family: Helvetica, Arial, sans-serif;
+}
+.card-facebook-seo-og-description {
+    color: #606770;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+.card-twitter-seo-description {
+    padding: 10px 12px;
+    border-radius: 0px 0px 5px 5px;
+    border: 1px solid #dadde1;
+    width: 500px;
+}
+.card-twitter-seo-image {
+    border-radius: 5px 5px 0px 0px;
+    border: 1px solid #dadde1;
+    width: 500px;
+    height: 261px;
+}
+.card-twitter-seo-title {
+    font-size: 1em;
+    color: #18283E;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+
+}
+.card-twitter-seo-description {
+    line-height: 1.3em;
+    letter-spacing: normal;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    color: black;
+}
+.card-twitter-seo-url {
+    color: #8899A6;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+}
+.edit-button {
+    background-color: #ffa502;
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+    border-radius: 100px;
+}
+.edit-button a {
+    color: white;
+}
+.edit-button a:hover {
+    color: white;
+}
+.alert {
+    background-color: white !important;
+}
+.notification-success i {
+    font-size: 32px;
+    color: #82d616;
+}
+.notification-danger i {
+    font-size: 32px;
+    color: #f53939;
+}
+.notification-secondary i {
+    font-size: 32px;
+    color: #17c1e8;
+}
+.alert .fa-xmark {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    font-size: 16px;
+    color: gray;
+}
+.warning-card {
+    height: 500px;
+    overflow-y: scroll;
+}
+.warning-card::-webkit-scrollbar {
+    width: 5px;
+}
+.warning-card::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+.warning-card::-webkit-scrollbar-thumb {
+    background: red;
+    border-radius: 10px;
+}
+.warning-card::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+}

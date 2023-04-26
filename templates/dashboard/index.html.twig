@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card bg-cover text-center" style="background-image: url('https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/curved-images/curved1.jpg')">
+                <div class="card-body z-index-2 py-4">
+                    <p class="text-white">
+                        Liczba przypisanych stron
+                    </p>
+                    <h2 class="text-white">{{ statistics['sitesCount'] }}</h2>
+                </div>
+                <div class="mask bg-gradient-primary border-radius-lg"></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-cover text-center" style="background-image: url('https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/curved-images/curved1.jpg')">
+                <div class="card-body z-index-2 py-4">
+                    <p class="text-white">
+                        Liczba dodanych postów
+                    </p>
+                    <h2 class="text-white">{{ statistics['postsCount'] }}</h2>
+                </div>
+                <div class="mask bg-gradient-danger border-radius-lg"></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card warning-card">
+                <div class="card-header">
+                    <h4>Uwagi</h4>
+                </div>
+                <div class="card-body">
+                    {% if statistics['warnings'] is not empty %}
+                        {% for site, warnings in statistics['warnings'] %}
+                            <h4>{{ site }}</h4>
+                            <hr>
+                            {% for warning in warnings %}
+                                <div class="alert notification-danger border-danger d-flex align-items-center justify-content-start" role="alert">
+                                    <i class="fa-solid fa-circle-exclamation me-2 text-md"></i>
+                                    <span class="alert-text text-dark">{{ warning|raw }}</span>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                        <div class="alert notification-success border-success d-flex align-items-center justify-content-start" role="alert">
+                            <i class="fa-solid fa-circle-check me-2 text-md"></i>
+                            <span class="alert-text text-dark">Wszystko w porządku, brak uwag!</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

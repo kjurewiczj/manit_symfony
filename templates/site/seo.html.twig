@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-header">
+                    <h2>SEO Twojej strony</h2>
+                </div>
+                <div class="card-body">
+                    <h4 class="d-flex flex-row align-items-center">Metadane ogólne <div class="edit-button d-flex justify-content-center align-items-center ms-2"><a href="{{ path('app_site_seo_edit', {'siteId' : site.id}) }}"><i class="fa-solid fa-pencil"></i></a></div></h4>
+                    <div class="form-group">
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Meta tytuł</span>
+                            <input type="text" class="form-control ps-2" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{{ site.metaTitle }}" disabled>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text">Meta opis</span>
+                            <input type="text" class="form-control ps-2" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{{ site.metaDescription }}" disabled>
+                        </div>
+                    </div>
+                    <h4 class="d-flex flex-row align-items-center">Metadane OG <div class="edit-button d-flex justify-content-center align-items-center ms-2"><a href="{{ path('app_site_seo_og_edit', {'siteId' : site.id}) }}"><i class="fa-solid fa-pencil"></i></a></div></h4>
+                    <div class="form-group">
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Meta tytuł</span>
+                            <input type="text" class="form-control ps-2" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{{ site.ogTitle }}" disabled>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text">Meta opis</span>
+                            <input type="text" class="form-control ps-2" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{{ site.ogDescription }}" disabled>
+                        </div>
+                    </div>
+                    <h4 class="d-flex flex-row align-items-center">Metadane Twitter <div class="edit-button d-flex justify-content-center align-items-center ms-2"><a href="{{ path('app_site_seo_twitter_edit', {'siteId' : site.id}) }}"><i class="fa-solid fa-pencil"></i></a></div></h4>
+                    <div class="form-group">
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Meta tytuł</span>
+                            <input type="text" class="form-control ps-2" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{{ site.twitterTitle }}" disabled>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text">Meta opis</span>
+                            <input type="text" class="form-control ps-2" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{{ site.twitterDescription }}" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h4>Czym jest SEO i metadane?</h4>
+                </div>
+                <div class="card-body">
+                    <h6>SEO to skrót od angielskiego terminu "Search Engine Optimization", czyli optymalizacja dla wyszukiwarek internetowych. SEO to zbiór działań, które mają na celu poprawienie widoczności strony internetowej w wynikach organicznych wyszukiwarek, takich jak Google, Bing czy Yahoo. Meta dane to elementy informacyjne umieszczone w kodzie źródłowym strony internetowej, które zawierają opisy treści strony. Dzięki powyższemu formularzowi możesz je dowolnie konfigurować, aby poprawić widoczność Twojej strony w internecie.</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Podgląd Google</h4>
+                    <div class="card-google-seo d-flex flex-column mb-4">
+                        <span class="card-google-seo-title">
+                            {{ site.metaTitle ?? 'Brak meta tytułu' }}
+                        </span>
+                        <span class="card-google-seo-url">
+                            {{ site.url ?? 'Brak url' }}
+                        </span>
+                        <span class="card-google-seo-description">
+                            {{ site.metaDescription ?? 'Brak opisu meta' }}
+                        </span>
+                    </div>
+                    <h4>Podgląd Facebook</h4>
+                    <div class="card-facebook-seo mb-4">
+                        {% if site.ogImage %}
+                            <img src="{{ asset('/uploads/images/' ~ site.ogImage) }}" class="card-facebook-seo-image">
+                        {% else %}
+                            <div class="card-facebook-seo-image d-flex justify-content-center align-items-center">
+                                Brak zdjęcia OG
+                            </div>
+                        {% endif %}
+                        <div class="card-facebook-seo-description">
+                            <span class="card-facebook-seo-url">
+                                {{ site.url ?? 'Brak url' }}
+                            </span>
+                            <div class="card-facebook-seo-content">
+                                <div class="card-facebook-seo-title">
+                                    {{ site.ogTitle ?? 'Brak tytułu OG' }}
+                                </div>
+                                <span class="card-facebook-seo-og-description">
+                                    {{ site.ogDescription ?? 'Brak opisu OG' }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Podgląd Twitter</h4>
+                    <div class="card-twitter-seo mb-4">
+                        {% if site.twitterImage %}
+                            <img src="{{ asset('/uploads/images/' ~ site.twitterImage) }}" class="card-twitter-seo-image">
+                        {% else %}
+                            <div class="card-twitter-seo-image d-flex justify-content-center align-items-center">
+                                Brak zdjęcia Twitter
+                            </div>
+                        {% endif %}
+                        <div class="card-twitter-seo-description">
+                            <div class="card-twitter-seo-content mb-1">
+                                <div class="card-twitter-seo-title">
+                                    {{ site.twitterTitle ?? 'Brak tytułu Twitter' }}
+                                </div>
+                                <span class="card-twitter-seo-og-description">
+                                    {{ site.twitterDescription ?? 'Brak opisu Twitter' }}
+                                </span>
+                            </div>
+                            <span class="card-twitter-seo-url">
+                                {{ site.url ?? 'Brak url' }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

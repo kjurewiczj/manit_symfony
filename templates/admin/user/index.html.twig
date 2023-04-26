@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="row">
+            {{ knp_pagination_render(users) }}
+        </div>
+        <div class="row">
+            {% for user in users %}
+                <div class="col-md-4 mb-4">
+                    <div class="card p-2">
+                        <div class="author align-items-center">
+                            <div class="avatar shadow bg-gradient-faded-success">
+                                {{ user.email|slice(0, 1) }}
+                            </div>
+                            <div class="name ps-3">
+                                <span>{{ user.email }}</span>
+                                <br>
+                                <a class="text-info font-weight-bold" href="{{ path('admin_user_edit', {'userId' : user.id}) }}">Edytuj</a>
+                                <a class="text-danger font-weight-bold" href="{{ path('admin_user_delete', {'userId' : user.id}) }}">Usuń</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            {{ knp_pagination_render(users) }}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="font-weight-light">Filtry</h3>
+                <hr>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Wyszukaj po nazwie" aria-label="Wyszukaj" aria-describedby="search-button">
+                </div>
+            </div>
+
+            <div class="card-footer bg-gradient-dark p-3 text-center">
+                <a href="" class="text-light">Szukaj</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

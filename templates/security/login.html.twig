@@ -1,0 +1,66 @@
+<head>
+    <link rel="icon" href="{{ asset('/images/manit_logo.png') }}">
+    <title>Manit | Logowanie</title>
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('soft-design-system') }}
+    {{ encore_entry_link_tags('soft-design-system-fonts') }}
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('soft-design-system-js') }}
+{% endblock %}
+</head>
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="offset-md-2 col-md-4">
+                <div class="mt-5">
+                    <h1>Zaloguj się do aplikacji Manit</h1>
+                    <h4 class="font-weight-light">I zarządzaj wszystkimi swoimi stronami internetowymi dzięki jednej aplikacji.</h4>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mt-5">
+                    <div class="card-header border-bottom bg-dark mb-2">
+                        <div class="d-flex align-items-center justify-content-center flex-column">
+                            <img src="{{ asset('/images/manit_logo.png') }}" class="img-thumbnail d-block" style="width: 52px; height: 48px;">
+                            <h4 class="m-0 p-0 text-light">Logowanie</h4>
+                        </div>
+                    </div>
+                    <div class="position-relative mt-n5" style="height: 50px;">
+                        <div class="position-absolute w-100">
+                            <svg class="waves waves-sm" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 40" preserveAspectRatio="none" shape-rendering="auto">
+                                <defs>
+                                    <path id="card-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+                                </defs>
+                                <g class="moving-waves">
+                                    <use xlink:href="#card-wave" x="48" y="-1" fill="rgba(255,255,255,0.30"></use>
+                                    <use xlink:href="#card-wave" x="48" y="3" fill="rgba(255,255,255,0.35)"></use>
+                                    <use xlink:href="#card-wave" x="48" y="5" fill="rgba(255,255,255,0.25)"></use>
+                                    <use xlink:href="#card-wave" x="48" y="8" fill="rgba(255,255,255,0.20)"></use>
+                                    <use xlink:href="#card-wave" x="48" y="13" fill="rgba(255,255,255,0.15)"></use>
+                                    <use xlink:href="#card-wave" x="48" y="16" fill="rgba(255,255,255,0.99)"></use>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        {% if error %}
+                            <div class="alert alert-danger mb-2 text-light">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+                        <form method="post" class="flex-column align-items-center justify-content-center d-flex">
+
+                            <input type="email" placeholder="E-mail" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-2" autocomplete="email" required autofocus>
+                            <input type="password" placeholder="Hasło" name="password" id="inputPassword" class="form-control mb-4" autocomplete="current-password" required>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            <button class="btn btn-lg btn-dark" type="submit">
+                                Zaloguj się
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

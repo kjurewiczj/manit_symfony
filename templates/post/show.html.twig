@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header p-0 m-4 position-relative z-index-1">
+                    <a href="" class="d-block">
+                        {% if post.image is not null %}
+                            <img src="{{ asset('/uploads/images/' ~ post.image) }}" class="img-fluid border-radius-lg post-image">
+                        {% else %}
+                            <img src="{{ asset('/images/no_image_info.png') }}" class="img-fluid border-radius-lg post-image">
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+            <div class="card card-frame mt-3">
+                <div class="card-body">
+                    <div class="author align-items-center">
+                        <div class="avatar shadow bg-gradient-faded-success">
+                            {{ post.userCreated.email|slice(0, 1) }}
+                        </div>
+                        <div class="name ps-3">
+                            <span>{{ post.userCreated.email }}</span>
+                            <div class="stats">
+                                <small>{{ post.createdAt|format_datetime(locale='pl') }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" style="overflow-wrap: break-word">
+            <h1>
+                {{ post.title }}
+                {% if post.status == 1 %}
+                    <i class="fa-solid fa-circle-check"></i>
+                {% else %}
+                    <i class="fa-solid fa-circle-xmark"></i>
+                {% endif %}
+                <span class="float-end font-weight-light">{{ post.price }}</span>
+            </h1>
+
+            <hr/>
+            <p>{{ post.content|raw }}</p>
+        </div>
+    </div>
+{% endblock %}

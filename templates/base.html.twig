@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="{{ asset('/images/manit_logo.png') }}">
+        <title>Manit | {{ title }}</title>
+        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+            {{ encore_entry_link_tags('soft-design-system') }}
+            {{ encore_entry_link_tags('soft-design-system-fonts') }}
+        {% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {{ encore_entry_script_tags('delete-action') }}
+            {{ encore_entry_script_tags('soft-design-system-js') }}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="alert-container position-fixed top-2 left-2 w-25 z-index-3">
+                {% for message in app.flashes('danger') %}
+                    <div class="alert notification-danger border-danger alert-dismissible fade show d-flex align-items-center justify-content-start" role="alert">
+                        <i class="fa-solid fa-circle-exclamation me-2 text-md"></i>
+                        <span class="alert-text text-dark">{{ message }}</span>
+                        <i class="fa-solid fa-xmark cursor-pointer" data-bs-dismiss="alert"></i>
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('success') %}
+                    <div class="alert notification-success border-success alert-dismissible fade show d-flex align-items-center justify-content-start" role="alert">
+                        <i class="fa-solid fa-circle-check me-2 text-md"></i>
+                        <span class="alert-text text-dark">{{ message }}</span>
+                        <i class="fa-solid fa-xmark cursor-pointer" data-bs-dismiss="alert"></i>
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('secondary') %}
+                    <div class="alert notification-secondary border-secondary alert-dismissible fade show d-flex align-items-center justify-content-start" role="alert">
+                        <i class="fa-solid fa-circle-question text-md me-2"></i>
+                        <span class="alert-text text-dark">{{ message }}</span>
+                        <i class="fa-solid fa-xmark cursor-pointer" data-bs-dismiss="alert"></i>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="row mt-2 mb-2">
+                <div class="col-md-2 d-flex flex-row align-items-center">
+                    <img src="{{ asset('/images/manit_logo.png') }}" class="img-thumbnail" style="width: 48px; height: 48px;">
+                    <h1 class="m-0 ms-1">Manit</h1>
+                </div>
+                <div class="col-md-10 d-flex align-items-center flex-row gap-3">
+                    {% if app.request.attributes.get('siteId') is not null and 'admin' not in app.request.attributes.get('_route') %}
+                        {% if back_link is defined %}
+                            <a href="{{ path(back_link, {'siteId' : app.request.attributes.get('siteId')}) }}" class="btn btn-icon btn-3 btn-warning">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </a>
+                        {% endif %}
+                        <a href="{{ path('app_post_create', {'siteId' : app.request.attributes.get('siteId')}) }}" class="btn btn-icon btn-3 btn-primary">
+                            <span class="btn-inner--icon"><i class="fa-solid fa-plus"></i></span>
+                            <span class="btn-inner--text text-light">Dodaj post</span>
+                        </a>
+                        <a href="{{ path('app_site_show', {'siteId' : app.request.attributes.get('siteId')}) }}" class="btn btn-icon btn-3 btn-primary">
+                            <span class="btn-inner--icon"><i class="fa-solid fa-list"></i></span>
+                            <span class="btn-inner--text text-light">Lista postów</span>
+                        </a>
+                    {% endif %}
+                    {% if app.request.attributes.get('_route') == 'app_site_show' %}
+                        <a href="{{ path('app_site_seo_show', {'siteId' : app.request.attributes.get('siteId')}) }}" class="btn btn-icon btn-3 btn-warning">
+                            <span class="btn-inner--icon"><i class="fa-solid fa-network-wired"></i></span>
+                            <span class="btn-inner--text text-light">SEO</span>
+                        </a>
+                        <a href="{{ path('app_site_post_template', {'siteId' : app.request.attributes.get('siteId')}) }}" class="btn btn-icon btn-3 btn-warning">
+                            <span class="btn-inner--icon"><i class="fa-solid fa-puzzle-piece"></i></span>
+                            <span class="btn-inner--text text-light">Szablon postów</span>
+                        </a>
+                    {% endif %}
+                    {% if app.request.attributes.get('_route') == 'app_post_show' %}
+                        <a href="{{ path('app_post_generate_pdf',{'siteId' : app.request.attributes.get('siteId'), 'postId' : app.request.attributes.get('postId')}) }}" class="btn btn-icon btn-3 btn-secondary">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </a>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN') and 'admin' in app.request.attributes.get('_route') %}
+                        <a href="{{ path('admin_site_create') }}" class="btn btn-icon btn-3 btn-primary">
+                            <span class="btn-inner--icon"><i class="fa-solid fa-plus"></i></span>
+                            <span class="btn-inner--text text-light">Dodaj stronę</span>
+                        </a>
+                        <a href="{{ path('admin_user_create') }}" class="btn btn-icon btn-3 btn-primary">
+                            <span class="btn-inner--icon"><i class="fa-solid fa-plus"></i></span>
+                            <span class="btn-inner--text text-light">Dodaj użytkownika</span>
+                        </a>
+                        {% if app.request.attributes.get('_route') == 'admin_site_show' %}
+                            <a href="{{ path('admin_site_edit', {'siteId' : app.request.attributes.get('siteId')}) }}" class="btn btn-icon btn-3 btn-warning">
+                                <span class="btn-inner--text text-light">Edytuj stronę</span>
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-2">
+                    <ul class="list-unstyled">
+                        <li class="mt-2">
+                            <div class="dropdown">
+                                <button class="btn bg-gradient-success dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ app.user.email }}
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="{{ path('app_logout') }}">Wyloguj</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="mt-2">
+                            <a href="{{ path('app_dashboard_index') }}" class="d-flex flex-row align-items-center">
+                                <i class="fa-solid fa-chart-simple me-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="mt-2">
+                            <a href="{{ path('app_site_index') }}" class="d-flex flex-row align-items-center">
+                                <i class="fa-solid fa-book me-2"></i>
+                                Twoje strony
+                            </a>
+                        </li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <hr>
+                            <li class="mt-2">
+                                <a href="{{ path('admin_site_index') }}" class="d-flex flex-row align-items-center">
+                                    <i class="fa-solid fa-gear me-2"></i>
+                                    Menedżer stron
+                                </a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="{{ path('admin_user_index') }}" class="d-flex flex-row align-items-center">
+                                    <i class="fa-solid fa-gear me-2"></i>
+                                    Menedżer użytkowników
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="col-md-10">
+                    <div>
+                        {% block body %}
+
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
